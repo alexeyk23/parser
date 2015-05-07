@@ -1,0 +1,24 @@
+#include<stdlib.h>
+#include <sys/resource.h>
+int main(int argc, char **argv, char **env)
+{
+struct rusage r_usage;
+printf("\nProcess Informaition:\n");
+printf("Process name = \t\t%s\n", argv[0]);
+printf("User ID = \t\t< %d >\n", getuid());
+printf("Effective User ID = \t< %d >\n", geteuid());
+printf("Group ID = \t\t< %d >\n", getgid());
+printf("Effective Group ID = \t< %d >\n", getegid());
+printf("Process Group ID = \t< %d >\n", getpgid(0));
+printf("Process ID ( PID )= \t< %d >\n", getpid(0));
+printf("Parent PID ( PPID )= \t< %d >\n", getppid(0));
+printf("Process priority= \t< %d >\n", getprio(0));
+printf("Processor utilisation:\n");
+getrusage (RUSAGE_SELF, &r_usage);
+printf("\t< user time = %d sec, %d microsec >\n",
+r_usage.ru_utime.tv_sec, r_usage.ru_utime.tv_usec);
+printf("\t< system time = %d sec, %d microsec >\n",
+r_usage.ru_stime.tv_sec, r_usage.ru_stime.tv_usec);
+return EXIT_SUCCESS;
+}
+
